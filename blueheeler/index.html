@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BlueHeeler Privacy Policy</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { max-width: 720px; margin: 0 auto; padding: 28px 18px 64px;
+         font-family: -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
+         line-height: 1.6; color: #1a1a1a; background: #fff; }
+  @media (prefers-color-scheme: dark) { body { color: #e6e6e6; background: #121212; } a { color: #6cb6ff; } }
+  h1 { font-size: 1.7rem; margin: 0 0 4px; }
+  h2 { font-size: 1.2rem; margin: 30px 0 8px; border-bottom: 1px solid #8884; padding-bottom: 5px; }
+  .updated { color: #8a8a8a; font-size: .9rem; margin: 0 0 8px; }
+  blockquote { margin: 16px 0; padding: 10px 16px; border-left: 4px solid #2b8a3e;
+               background: #2b8a3e14; font-weight: 600; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: .95rem; }
+  th, td { border: 1px solid #8884; padding: 7px 10px; text-align: left; vertical-align: top; }
+  code { background: #8881; padding: 1px 5px; border-radius: 4px; }
+  footer { margin-top: 40px; color: #8a8a8a; font-size: .85rem; }
+</style>
+</head>
+<body>
+<h1>BlueHeeler Privacy Policy</h1>
+<p class="updated">Last updated: 2026-06-26</p>
+
+<p>BlueHeeler is a defensive counter-surveillance scanner. It passively detects nearby Bluetooth and Wi-Fi devices so you can spot trackers, hidden bugs, and devices that may be following you. It is built to protect at-risk people, and its core promise is simple:</p>
+
+<blockquote>We run no server, and your scan data is never sent to us.</blockquote>
+
+<p>BlueHeeler has no account, no sign-in, no analytics, no advertising, and no crash reporting. The app makes no network calls of its own. All detection happens on your phone.</p>
+
+<h2>What the app reads</h2>
+<p>To do its job, BlueHeeler reads radio signals that nearby devices broadcast publicly:</p>
+<ul>
+  <li>Bluetooth and Wi-Fi device identifiers (MAC addresses), Wi-Fi network names (SSIDs), signal strength (RSSI), and timestamps.</li>
+  <li>Approximate location, only if you turn it on, to note the rough area where a device was seen. This drives "co-traveller" detection. Location is off by default and is never required.</li>
+</ul>
+<p>These identifiers belong to the devices around you. BlueHeeler reads them locally to judge whether something is following you. It does not look them up online and does not share them.</p>
+
+<h2>Where your data is stored</h2>
+<p>Everything BlueHeeler records is stored on your phone. There is no cloud copy.</p>
+<p>For troubleshooting, the app can write plain-text diagnostic copies of recent events to its own folder in shared storage. This is <strong>off by default</strong>. You can turn it on under Settings if you need to share a bug report, and the panic wipe described below clears it.</p>
+
+<h2>Network access and third parties</h2>
+<p>The app makes no network calls of its own. The only networked component is <strong>Google Play Billing</strong>, used solely to process the optional one-time "Pro" unlock. Billing runs through Google's own libraries and privacy policy. BlueHeeler receives only a yes or no "is Pro unlocked" answer and stores no payment information. Your scan data is never part of this. (Because Google's billing libraries are bundled, the installed app does carry Android's INTERNET permission. BlueHeeler's own code never uses it.)</p>
+
+<h2>Optional features that put something on the air</h2>
+<p>These features are off by default and act only when you turn them on:</p>
+<ul>
+  <li><strong>Pack / Swarm mode</strong> shares detection state with your own nearby trusted phones over Bluetooth, peer to peer, with no internet and no cloud. If you also have location turned on, the shared heartbeat includes your <strong>approximate location</strong>, so your trusted phones can place a detection on a map. Messages are integrity-signed with a shared key you set (HMAC-SHA-256) so a stranger cannot inject false data. They are not encrypted for secrecy, so treat Pack mode as a broadcast to people physically near you. Leave it off if you do not want any location on the air.</li>
+  <li><strong>Distress action</strong> (part of the optional Dead Man's Switch) can open a link, message, or call to a destination <strong>you choose</strong> if a check-in is missed. It carries no scan data, and the destination is yours. BlueHeeler does not provide one.</li>
+</ul>
+
+<h2>Optional security-notification capture</h2>
+<p>If you turn it on and grant Android's Notification Access, BlueHeeler can read notifications <strong>only from the security apps you tick</strong> (for example your camera or alarm apps) and add them to your on-device security log, next to the radio detections from the same moment. This lets you see when a camera fired while an unknown device was nearby. It reads nothing from any other app, stores entries only on your phone, and is off by default. You can revoke Notification Access at any time in Android settings.</p>
+
+<h2>Permissions and why</h2>
+<table>
+  <tr><th>Permission</th><th>Why</th></tr>
+  <tr><td>Bluetooth scan / connect / advertise</td><td>Detect nearby Bluetooth devices and trackers, and advertise to your own Pack peers</td></tr>
+  <tr><td>Nearby Wi-Fi devices</td><td>Detect nearby Wi-Fi access points and devices</td></tr>
+  <tr><td>Approximate location (optional)</td><td>Rough "where was this seen" for co-traveller detection, only if you enable it</td></tr>
+  <tr><td>Notification access (optional)</td><td>Log notifications from the security apps you choose (see above)</td></tr>
+  <tr><td>Foreground service and notifications</td><td>Keep scanning while the app is in the background, and alert you</td></tr>
+  <tr><td>USB host (optional)</td><td>Use an optional external Wi-Fi adapter for monitor-mode capture</td></tr>
+  <tr><td>Camera (optional)</td><td>Scan a QR code to pair with a Pack peer. You can deny it and the rest still works</td></tr>
+</table>
+
+<h2>Your control</h2>
+<ul>
+  <li><strong>Panic wipe</strong> ("Turn and Burn") overwrites and deletes the app's stored data, including the diagnostic copies. (Flash storage wear-levelling means software cannot fully guarantee physical erasure.)</li>
+  <li>You can disable any detection feature and clear all stored data at any time.</li>
+  <li>Cryptography in the app is used only for data integrity and authentication (HMAC-SHA-256, SHA-256), not to conceal data, because the app sends no data to us.</li>
+</ul>
+
+<h2>Transmission</h2>
+<p>The published build is <strong>receive-only</strong>. It listens, and it does not transmit forged Wi-Fi frames. Active-transmit capability exists only in private research builds that are not distributed through the store.</p>
+
+<h2>Children</h2>
+<p>BlueHeeler is not directed at children and collects no personal information to profile anyone.</p>
+
+<h2>Changes and contact</h2>
+<p>Material changes will be reflected here with an updated date.</p>
+<p>Questions: <a href="mailto:xredux@protonmail.com">xredux@protonmail.com</a></p>
+
+<footer>BlueHeeler &middot; com.kosheen.antistalker</footer>
+</body>
+</html>
