@@ -4,87 +4,490 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BlueHeeler Privacy Policy</title>
+<meta name="description" content="How BlueHeeler handles information: what it reads, what stays on your phone, and the few times anything leaves it.">
 <style>
-  :root { color-scheme: light dark; }
-  body { max-width: 720px; margin: 0 auto; padding: 28px 18px 64px;
-         font-family: -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
-         line-height: 1.6; color: #1a1a1a; background: #fff; }
-  @media (prefers-color-scheme: dark) { body { color: #e6e6e6; background: #121212; } a { color: #6cb6ff; } }
-  h1 { font-size: 1.7rem; margin: 0 0 4px; }
-  h2 { font-size: 1.2rem; margin: 30px 0 8px; border-bottom: 1px solid #8884; padding-bottom: 5px; }
-  .updated { color: #8a8a8a; font-size: .9rem; margin: 0 0 8px; }
-  blockquote { margin: 16px 0; padding: 10px 16px; border-left: 4px solid #2b8a3e;
-               background: #2b8a3e14; font-weight: 600; }
-  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: .95rem; }
-  th, td { border: 1px solid #8884; padding: 7px 10px; text-align: left; vertical-align: top; }
-  code { background: #8881; padding: 1px 5px; border-radius: 4px; }
-  footer { margin-top: 40px; color: #8a8a8a; font-size: .85rem; }
+  /* No web fonts, scripts or images from anywhere else: a privacy page should not tell a third party who read it. */
+  :root {
+    --ground: #f4f7f9;
+    --surface: #ffffff;
+    --ink: #13202a;
+    --muted: #536576;
+    --rule: #d6dfe7;
+    --accent: #0a6f86;
+    --accent-ink: #ffffff;
+    --accent-soft: #e2f1f5;
+    --leaves: #8a4b00;
+    --leaves-soft: #fbefdf;
+    --stays: #23663a;
+    --stays-soft: #e3f2e7;
+    --code: #eef2f5;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0d1419;
+      --surface: #141e25;
+      --ink: #e3eaf0;
+      --muted: #93a5b5;
+      --rule: #263540;
+      --accent: #56c4dc;
+      --accent-ink: #0d1419;
+      --accent-soft: #11313b;
+      --leaves: #f0b46a;
+      --leaves-soft: #352512;
+      --stays: #7fd39a;
+      --stays-soft: #14301e;
+      --code: #1b2730;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1419;
+    --surface: #141e25;
+    --ink: #e3eaf0;
+    --muted: #93a5b5;
+    --rule: #263540;
+    --accent: #56c4dc;
+    --accent-ink: #0d1419;
+    --accent-soft: #11313b;
+    --leaves: #f0b46a;
+    --leaves-soft: #352512;
+    --stays: #7fd39a;
+    --stays-soft: #14301e;
+    --code: #1b2730;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 16px; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+  strong { font-weight: 650; }
+  code { font: 0.9em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--code); padding: 1px 5px; border-radius: 4px; }
+
+  .masthead { background: var(--surface); border-bottom: 1px solid var(--rule); }
+  .masthead-inner { max-width: 1120px; margin: 0 auto; padding: 40px 16px 32px; }
+  .eyebrow { margin: 0 0 6px; color: var(--accent); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  h1 { margin: 0 0 12px; font-size: clamp(1.9rem, 4.6vw, 2.7rem); line-height: 1.15; letter-spacing: -0.015em; text-wrap: balance; }
+  .lede { max-width: 62ch; margin: 0 0 18px; font-size: 1.1rem; color: var(--ink); }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: 0.9rem; }
+
+  .layout { max-width: 1120px; margin: 0 auto; padding: 28px 16px 72px; display: grid; gap: 36px; }
+  @media (min-width: 1000px) { .layout { grid-template-columns: 240px minmax(0, 1fr); gap: 56px; } }
+
+  .toc { font-size: 0.92rem; }
+  .toc details { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 16px; }
+  .toc summary { cursor: pointer; font-weight: 650; }
+  .toc ol { margin: 10px 0 0; padding-left: 20px; display: grid; gap: 4px; }
+  .toc li, .meta li { margin: 0; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+  @media (min-width: 1000px) {
+    .toc { position: sticky; top: 24px; align-self: start; max-height: calc(100vh - 48px); overflow-y: auto; }
+    .toc details { background: transparent; border: 0; padding: 0; }
+    .toc summary { list-style: none; color: var(--muted); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; pointer-events: none; }
+    .toc summary::-webkit-details-marker { display: none; }
+  }
+
+  main { min-width: 0; }
+  main > section { max-width: 760px; }
+  main > section + section { margin-top: 52px; }
+  h2 { margin: 0 0 14px; font-size: 1.45rem; line-height: 1.25; letter-spacing: -0.01em; text-wrap: balance; }
+  h3 { margin: 26px 0 8px; font-size: 1.08rem; }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li + li { margin-top: 6px; }
+  .note { color: var(--muted); font-size: 0.93rem; }
+
+  .short { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 640px) { .short { grid-template-columns: 1fr 1fr; } }
+  .short li { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; }
+  .short b { display: block; margin-bottom: 4px; font-size: 1.02rem; }
+  .short span { color: var(--muted); font-size: 0.95rem; }
+
+  .panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 20px; margin: 0 0 14px; }
+  .panel > :last-child { margin-bottom: 0; }
+
+  .chip { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 0.78rem; font-weight: 650; letter-spacing: 0.02em; white-space: nowrap; }
+  .chip.stays { color: var(--stays); background: var(--stays-soft); }
+  .chip.leaves { color: var(--leaves); background: var(--leaves-soft); }
+  .chip.opt { color: var(--accent); background: var(--accent-soft); }
+
+  .wide { max-width: none !important; }
+  .table-wrap { overflow-x: auto; margin: 0 0 14px; }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; font-size: 0.93rem; line-height: 1.5; }
+  th, td { padding: 11px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); }
+  thead th { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--ground); }
+  tbody tr:last-child td { border-bottom: 0; }
+  td:first-child { font-weight: 650; min-width: 9em; }
+  td .sub { display: block; font-weight: 400; color: var(--muted); font-size: 0.86rem; margin-top: 2px; }
+  @media (max-width: 720px) {
+    table, thead, tbody, tr, th, td { display: block; }
+    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    table { border: 0; background: transparent; }
+    tr { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; margin-bottom: 12px; padding: 4px 0; }
+    td { border: 0; padding: 6px 16px; }
+    td:first-child { padding-top: 12px; font-size: 1rem; }
+    td:not(:first-child)::before { content: attr(data-label); display: block; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  }
+
+  footer { max-width: 1120px; margin: 0 auto; padding: 22px 16px 40px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.86rem; }
 </style>
 </head>
 <body>
-<h1>BlueHeeler Privacy Policy</h1>
-<p class="updated">Last updated: 2026-06-26</p>
 
-<p>BlueHeeler is a defensive counter-surveillance scanner. It passively detects nearby Bluetooth and Wi-Fi devices so you can spot trackers, hidden bugs, and devices that may be following you. It is built to protect at-risk people, and its core promise is simple:</p>
+<header class="masthead">
+  <div class="masthead-inner">
+    <p class="eyebrow">BlueHeeler for Android</p>
+    <h1>Privacy Policy</h1>
+    <p class="lede">BlueHeeler helps you find Bluetooth trackers and other devices that may be following you. People often use it when their safety is at risk, so it is built to keep what it learns on your phone. This policy explains what the app reads, what it keeps, the few times anything leaves your phone, and how you control all of it.</p>
+    <ul class="meta">
+      <li>Last updated 7 October 2026</li>
+      <li>Covers every version; <a href="#earlier">earlier versions</a> noted</li>
+      <li>Publisher: Blue Heeler Software</li>
+    </ul>
+  </div>
+</header>
 
-<blockquote>We run no server, and your scan data is never sent to us.</blockquote>
+<div class="layout">
+  <nav class="toc" aria-label="Contents">
+    <details open>
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#short">The short version</a></li>
+        <li><a href="#who">Who we are</a></li>
+        <li><a href="#reads">What BlueHeeler reads</a></li>
+        <li><a href="#location">Your location</a></li>
+        <li><a href="#stored">What stays on your phone</a></li>
+        <li><a href="#backup">Android backup</a></li>
+        <li><a href="#leaves">When information leaves your phone</a></li>
+        <li><a href="#radio">Signals BlueHeeler sends</a></li>
+        <li><a href="#third">Google and other companies</a></li>
+        <li><a href="#permissions">Permissions</a></li>
+        <li><a href="#security">How your information is protected</a></li>
+        <li><a href="#choices">Your choices and deleting data</a></li>
+        <li><a href="#rights">Your privacy rights</a></li>
+        <li><a href="#others">Information about other people</a></li>
+        <li><a href="#children">Children</a></li>
+        <li><a href="#changes">Changes to this policy</a></li>
+        <li><a href="#contact">Contact us</a></li>
+      </ol>
+    </details>
+  </nav>
 
-<p>BlueHeeler has no account, no sign-in, no analytics, no advertising, and no crash reporting. The app makes no network calls of its own. All detection happens on your phone.</p>
+  <main>
 
-<h2>What the app reads</h2>
-<p>To do its job, BlueHeeler reads radio signals that nearby devices broadcast publicly:</p>
-<ul>
-  <li>Bluetooth and Wi-Fi device identifiers (MAC addresses), Wi-Fi network names (SSIDs), signal strength (RSSI), and timestamps.</li>
-  <li>Approximate location, only if you turn it on, to note the rough area where a device was seen. This drives "co-traveller" detection. Location is off by default and is never required.</li>
-</ul>
-<p>These identifiers belong to the devices around you. BlueHeeler reads them locally to judge whether something is following you. It does not look them up online and does not share them.</p>
+    <section id="short" class="wide">
+      <h2>The short version</h2>
+      <ul class="short">
+        <li><b>We run no servers.</b><span>There is no account, no sign-in, no analytics, no advertising and no crash reporting. Nothing BlueHeeler records is sent to us.</span></li>
+        <li><b>Your scans stay on your phone.</b><span>The devices it hears, your alerts, history and places are stored on the phone, unless you share them or turn on a feature that does.</span></li>
+        <li><b>Location is off until you turn it on.</b><span>Even then, positions are kept on your phone, and leave it only in the optional ways listed below.</span></li>
+        <li><b>Google is involved in a few places.</b><span>Google Play (installing the app and buying Pro), Android backup, and an address lookup that runs only when you ask. Each is explained below.</span></li>
+        <li><b>You are in control.</b><span>Every optional feature can be turned off, and Turn and Burn wipes everything BlueHeeler holds on your phone.</span></li>
+        <li><b>We never sell or share your information.</b><span>We do not have it to sell. We do not use advertising networks, data brokers or analytics companies.</span></li>
+      </ul>
+    </section>
 
-<h2>Where your data is stored</h2>
-<p>Everything BlueHeeler records is stored on your phone. There is no cloud copy.</p>
-<p>For troubleshooting, the app can write plain-text diagnostic copies of recent events to its own folder in shared storage. This is <strong>off by default</strong>. You can turn it on under Settings if you need to share a bug report, and the panic wipe described below clears it.</p>
+    <section id="who">
+      <h2>Who we are</h2>
+      <p>BlueHeeler is published by Blue Heeler Software ("we", "us"). This policy covers the BlueHeeler app for Android, distributed on Google Play with the package name <code>com.kosheen.antistalker</code>.</p>
+      <p>BlueHeeler does its work on your phone. We do not operate any server that the app talks to, and the app sends us none of what it records. When this policy describes information being "kept" or "stored", it means on your own phone, by software you control.</p>
+      <p>Questions about this policy can go to <a href="mailto:xredux@protonmail.com">xredux@protonmail.com</a>.</p>
+    </section>
 
-<h2>Network access and third parties</h2>
-<p>The app makes no network calls of its own. The only networked component is <strong>Google Play Billing</strong>, used solely to process the optional one-time "Pro" unlock. Billing runs through Google's own libraries and privacy policy. BlueHeeler receives only a yes or no "is Pro unlocked" answer and stores no payment information. Your scan data is never part of this. (Because Google's billing libraries are bundled, the installed app does carry Android's INTERNET permission. BlueHeeler's own code never uses it.)</p>
+    <section id="reads">
+      <h2>What BlueHeeler reads</h2>
 
-<h2>Optional features that put something on the air</h2>
-<p>These features are off by default and act only when you turn them on:</p>
-<ul>
-  <li><strong>Pack / Swarm mode</strong> shares detection state with your own nearby trusted phones over Bluetooth, peer to peer, with no internet and no cloud. If you also have location turned on, the shared heartbeat includes your <strong>approximate location</strong>, so your trusted phones can place a detection on a map. Messages are integrity-signed with a shared key you set (HMAC-SHA-256) so a stranger cannot inject false data. They are not encrypted for secrecy, so treat Pack mode as a broadcast to people physically near you. Leave it off if you do not want any location on the air.</li>
-  <li><strong>Distress action</strong> (part of the optional Dead Man's Switch) can open a link, message, or call to a destination <strong>you choose</strong> if a check-in is missed. It carries no scan data, and the destination is yours. BlueHeeler does not provide one.</li>
-</ul>
+      <h3>Signals from devices around you</h3>
+      <p>Bluetooth and Wi-Fi devices announce themselves over the air so that other devices can find them. BlueHeeler listens to those announcements and reads:</p>
+      <ul>
+        <li>device identifiers (Bluetooth and Wi-Fi addresses);</li>
+        <li>device names and Wi-Fi network names;</li>
+        <li>the kind of device or company a device says it is, and the services it advertises;</li>
+        <li>signal strength, and the time each device was heard.</li>
+      </ul>
+      <p>BlueHeeler uses these to recognise trackers, to tell one device from another, and to notice a device that keeps turning up wherever you go. It never looks these identifiers up online and never sends them to us.</p>
 
-<h2>Optional security-notification capture</h2>
-<p>If you turn it on and grant Android's Notification Access, BlueHeeler can read notifications <strong>only from the security apps you tick</strong> (for example your camera or alarm apps) and add them to your on-device security log, next to the radio detections from the same moment. This lets you see when a camera fired while an unknown device was nearby. It reads nothing from any other app, stores entries only on your phone, and is off by default. You can revoke Notification Access at any time in Android settings.</p>
+      <h3>Notifications from your security apps <span class="chip opt">Optional, Pro</span></h3>
+      <p>If you turn on the Security log and give BlueHeeler Android's notification access, it reads notifications only from the security apps you tick, such as a camera, doorbell or alarm app. For each one it keeps the app's name, the notification's title and text, and the time, next to the devices it heard at that moment. That lets you see, for example, that a camera spotted motion while an unknown device was nearby. It ignores every other app. You can withdraw notification access in Android's settings at any time.</p>
 
-<h2>Permissions and why</h2>
-<table>
-  <tr><th>Permission</th><th>Why</th></tr>
-  <tr><td>Bluetooth scan / connect / advertise</td><td>Detect nearby Bluetooth devices and trackers, and advertise to your own Pack peers</td></tr>
-  <tr><td>Nearby Wi-Fi devices</td><td>Detect nearby Wi-Fi access points and devices</td></tr>
-  <tr><td>Approximate location (optional)</td><td>Rough "where was this seen" for co-traveller detection, only if you enable it</td></tr>
-  <tr><td>Notification access (optional)</td><td>Log notifications from the security apps you choose (see above)</td></tr>
-  <tr><td>Foreground service and notifications</td><td>Keep scanning while the app is in the background, and alert you</td></tr>
-  <tr><td>USB host (optional)</td><td>Use an optional external Wi-Fi adapter for monitor-mode capture</td></tr>
-  <tr><td>Camera (optional)</td><td>Scan a QR code to pair with a Pack peer. You can deny it and the rest still works</td></tr>
-</table>
+      <h3>What BlueHeeler does not read</h3>
+      <p>BlueHeeler does not read your contacts, messages, photos, files, browsing, call history or accounts. It does not use your phone's advertising ID. The camera is used only if you choose to scan a QR code to join your phones into a Pack, and no picture is kept.</p>
+    </section>
 
-<h2>Your control</h2>
-<ul>
-  <li><strong>Panic wipe</strong> ("Turn and Burn") overwrites and deletes the app's stored data, including the diagnostic copies. (Flash storage wear-levelling means software cannot fully guarantee physical erasure.)</li>
-  <li>You can disable any detection feature and clear all stored data at any time.</li>
-  <li>Cryptography in the app is used only for data integrity and authentication (HMAC-SHA-256, SHA-256), not to conceal data, because the app sends no data to us.</li>
-</ul>
+    <section id="location">
+      <h2>Your location</h2>
+      <p><strong>Use location</strong> is off when you install BlueHeeler. It stays off unless you turn it on in Settings and accept Android's location permission. If you do:</p>
+      <ul>
+        <li>While protection is running, BlueHeeler notes where you are when it hears devices, so it can tell whether one of them has moved with you.</li>
+        <li>It asks Android for a fresh, precise position only when it hears a device that matters: a tracker, a device you flagged or pinned, a name you asked it to watch for, or a device that seems to be following you. It asks at most once every two minutes.</li>
+        <li>Without Pro, the positions noted with devices are held in the phone's memory only, and are gone when BlueHeeler closes (apart from the rough areas described below).</li>
+        <li>With Pro you can turn on <strong>Places</strong>. BlueHeeler then keeps a numbered point for each place where a tracker or flagged device was heard, so you can build a dated record over time, and you can name each place. Places is off until you turn it on.</li>
+        <li><strong>Spot devices you keep seeing</strong> works only while Use location is on. It keeps the rough area, to about 2 km, where everyday devices you hear often tend to stay, for up to 60 days, so BlueHeeler can offer to stop warning you about them. Trackers are never remembered this way.</li>
+      </ul>
+      <p>Android, not BlueHeeler, works out your position. If Google Location Accuracy is on in your phone's settings, Android may use Google's location service to do so, as it does for every app on the phone. That is a setting of your phone, outside BlueHeeler.</p>
+      <div class="panel">
+        <p><strong>Android 8 to 11.</strong> On these versions, Android shows Bluetooth devices only to apps that hold location permission, so BlueHeeler asks for it there simply to scan. Holding that permission does not turn on Use location. Until you confirm Use location's explanation, any position BlueHeeler sees on these versions is rounded to about 2 km.</p>
+      </div>
+    </section>
 
-<h2>Transmission</h2>
-<p>The published build is <strong>receive-only</strong>. It listens, and it does not transmit forged Wi-Fi frames. Active-transmit capability exists only in private research builds that are not distributed through the store.</p>
+    <section id="stored" class="wide">
+      <h2>What stays on your phone</h2>
+      <p style="max-width:760px">Everything BlueHeeler records is stored in its private storage on your phone. This table lists each kind of record, why it exists, how long it is kept, and whether Android backup copies it.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Record</th><th scope="col">Why it is kept</th><th scope="col">How long</th><th scope="col">Android backup</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Settings and your device lists<span class="sub">Trusted, flagged and pinned devices, your notes on devices, and the names you asked it to watch for</span></td>
+              <td data-label="Why">So the app works the way you set it up</td>
+              <td data-label="How long">Until you change or delete them</td>
+              <td data-label="Android backup"><span class="chip leaves">Copied</span></td>
+            </tr>
+            <tr>
+              <td>Alert history<span class="sub">Pro</span></td>
+              <td data-label="Why">A record of what was found, across sessions</td>
+              <td data-label="How long">You choose 7, 30 or 90 days, or forever; 30 days unless you change it. Trackers, flagged devices and other strong evidence are kept until you delete them. At most 1,000 records.</td>
+              <td data-label="Android backup"><span class="chip leaves">Copied</span></td>
+            </tr>
+            <tr>
+              <td>Security log<span class="sub">Optional, Pro</span></td>
+              <td data-label="Why">Notifications from the security apps you chose, next to the devices heard at that moment</td>
+              <td data-label="How long">Up to 2,000 entries, trimmed to your history setting</td>
+              <td data-label="Android backup"><span class="chip leaves">Copied</span></td>
+            </tr>
+            <tr>
+              <td>Pack and safety settings<span class="sub">Optional, Pro</span></td>
+              <td data-label="Why">The passphrase that joins your own phones, and the Dead Man's Switch setup</td>
+              <td data-label="How long">Until you change them</td>
+              <td data-label="Android backup"><span class="chip leaves">Copied</span></td>
+            </tr>
+            <tr>
+              <td>Places<span class="sub">Optional, Pro</span></td>
+              <td data-label="Why">Where trackers and flagged devices were heard, with the names and notes you add</td>
+              <td data-label="How long">Until you delete them, unless you choose 1 year, 90 days or 30 days. A month holding evidence you chose to keep is never removed automatically.</td>
+              <td data-label="Android backup"><span class="chip stays">Never</span></td>
+            </tr>
+            <tr>
+              <td>Familiar device areas</td>
+              <td data-label="Why">To offer to stop warning you about everyday devices (needs Use location)</td>
+              <td data-label="How long">60 days</td>
+              <td data-label="Android backup"><span class="chip stays">Never</span></td>
+            </tr>
+            <tr>
+              <td>Positions without Pro</td>
+              <td data-label="Why">To notice a device that moves with you</td>
+              <td data-label="How long">Until BlueHeeler closes (memory only)</td>
+              <td data-label="Android backup"><span class="chip stays">Never</span></td>
+            </tr>
+            <tr>
+              <td>Scanning record</td>
+              <td data-label="Why">When scanning was on or off, so a saved log can show which times it covers. It holds no device data.</td>
+              <td data-label="How long">About 2 MB at most; the oldest part is replaced first</td>
+              <td data-label="Android backup"><span class="chip stays">Never</span></td>
+            </tr>
+            <tr>
+              <td>Diagnostic copies<span class="sub">Off unless you turn them on</span></td>
+              <td data-label="Why">Plain-text copies of recent alerts for a bug report. They are written to shared storage, where a file manager or a USB cable can reach them.</td>
+              <td data-label="How long">Replaced as they update, until you turn them off and wipe or uninstall</td>
+              <td data-label="Android backup"><span class="chip stays">Never</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="max-width:760px">Files you save, such as a log in Downloads or a report you export, are your own files. BlueHeeler does not delete them, and they keep whatever you chose to put in them.</p>
+    </section>
 
-<h2>Children</h2>
-<p>BlueHeeler is not directed at children and collects no personal information to profile anyone.</p>
+    <section id="backup">
+      <h2>Android backup</h2>
+      <p>Android can copy app data to your Google Account, so it comes back when you replace or reset your phone. If backup is on for your phone, Android copies the records marked "Copied" in the table above: your settings and device lists, alert history, the Security log (including the text of those notifications), your Pack passphrase, your Dead Man's Switch setup, and whether Pro is unlocked. Google stores this copy under its own privacy policy. The same records may also move across when you set up a new phone from your old one.</p>
+      <p>Places, positions, familiar device areas, the scanning record and diagnostic copies are never copied to a backup or a new phone.</p>
+      <p>We keep backup available on purpose: a backup has helped people recover a record they needed after their phone was lost or reset. If you would rather not have a copy with Google, turn off backup in your phone's settings (usually Settings, Google, Backup). You can delete an existing copy from the same place or from Google Drive's Backups list.</p>
+      <div class="panel" id="earlier">
+        <p><strong>Versions before 1.0.170.</strong> Places, Suggest an address and Play sound arrive in version 1.0.170. In earlier versions, Android backup copies all of BlueHeeler's private data except the scanning record, so it also copies the familiar device areas (rough, to about 2 km) and, if you turned them on, the diagnostic copies. Earlier versions also remind you to turn protection back on after a restart, rather than restarting it themselves.</p>
+      </div>
+      <div class="panel">
+        <p><strong>Good to know.</strong> Turn and Burn wipes BlueHeeler on your phone, not the copy held by Google. That copy is replaced the next time Android backs up BlueHeeler, which happens after you open it again. To remove it straight away, delete it in your Google Account.</p>
+      </div>
+    </section>
 
-<h2>Changes and contact</h2>
-<p>Material changes will be reflected here with an updated date.</p>
-<p>Questions: <a href="mailto:xredux@protonmail.com">xredux@protonmail.com</a></p>
+    <section id="leaves" class="wide">
+      <h2>When information leaves your phone</h2>
+      <p style="max-width:760px">Nothing BlueHeeler records is ever sent to us. These are all the ways information can leave your phone, who receives it, and when.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Feature</th><th scope="col">What is sent</th><th scope="col">Who receives it</th><th scope="col">When</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Google Play<span class="sub">Every user</span></td>
+              <td data-label="What is sent">Google Play installs and updates BlueHeeler and knows your Google Account has it. Each time BlueHeeler opens, it checks with Google Play on your phone whether you have Pro. Google's billing software, which BlueHeeler includes for this, may also send Google technical information about those checks, such as which billing steps ran and whether they worked. None of your scans, positions or places are part of this.</td>
+              <td data-label="Who receives it">Google</td>
+              <td data-label="When">When BlueHeeler opens, and when you buy Pro</td>
+            </tr>
+            <tr>
+              <td>Buying Pro<span class="sub">Optional</span></td>
+              <td data-label="What is sent">Google Play handles the whole purchase. We never see your card or payment details. BlueHeeler only learns whether Pro is unlocked. Google gives us the order details it gives every developer, such as the order number, date, price and country, which we use only for refunds, tax and accounts.</td>
+              <td data-label="Who receives it">Google; order details to us</td>
+              <td data-label="When">When you buy</td>
+            </tr>
+            <tr>
+              <td>Android backup</td>
+              <td data-label="What is sent">The records listed under <a href="#backup">Android backup</a></td>
+              <td data-label="Who receives it">Google, in your Google Account</td>
+              <td data-label="When">When Android backs up, if backup is on</td>
+            </tr>
+            <tr>
+              <td>Suggest an address<span class="sub">Optional, Pro</span></td>
+              <td data-label="What is sent">One place's map point. Android also tells Google that BlueHeeler asked, and your phone's language, as it does for every address lookup. Not the place's name, whose place it is, or what was heard there. <a href="#address">More detail</a></td>
+              <td data-label="Who receives it">Google, through Google Play services</td>
+              <td data-label="When">Only when you tap Send to Google, which BlueHeeler asks every time</td>
+            </tr>
+            <tr>
+              <td>Open in another app</td>
+              <td data-label="What is sent">One position, never its name</td>
+              <td data-label="Who receives it">The maps app you pick. For example, Google Maps may save it to your Google Account activity.</td>
+              <td data-label="When">Only when you tap it</td>
+            </tr>
+            <tr>
+              <td>Save, share, AI Triage and reports</td>
+              <td data-label="What is sent">What you choose to include. A log lists device identifiers, names, signal strength, the scanning record, your history and Security log entries. Positions are included only if Include locations is ticked (it starts ticked for Save and unticked for Share), or if coordinates are on in a Places report. AI Triage, a log written for an AI assistant to read, never includes coordinates, place names or notes.</td>
+              <td data-label="Who receives it">Whoever, or whatever app, you share it with. That app's own policy then applies; an AI chat app, for instance, may keep what you give it.</td>
+              <td data-label="When">Only when you choose</td>
+            </tr>
+            <tr>
+              <td>Pack<span class="sub">Optional, Pro</span></td>
+              <td data-label="What is sent">A short Bluetooth heartbeat, described under <a href="#radio">Signals BlueHeeler sends</a></td>
+              <td data-label="Who receives it">Your own phones nearby, and any receiver within Bluetooth range</td>
+              <td data-label="When">While Pack is on and scanning</td>
+            </tr>
+            <tr>
+              <td>Dead Man's Switch distress action<span class="sub">Optional, Pro</span></td>
+              <td data-label="What is sent">Opens the message, call or link you set up. It adds no scan data.</td>
+              <td data-label="Who receives it">The person or service you chose</td>
+              <td data-label="When">Only if you miss a check-in you set up</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="address" style="max-width:760px">
+        <h3>Suggest an address in detail</h3>
+        <p>With Pro, a place's page can show a Suggest an address button; you can hide it in Settings, Location and Places. Each time you tap it, BlueHeeler first asks whether to send that place's map point to Google. Only if you tap Send to Google does it pass that one point to Android's address lookup, which Google Play services runs, so the point goes to Google over the internet, even with Location turned off. Google Play services makes the request from your phone, so Google may keep the point and link it to your phone, under Google's privacy policy. Once you tap Send to Google, the point may reach Google even if you then tap Cancel or no answer comes back.</p>
+        <p>The answer is Android's best guess at the nearest street address. It stays a suggestion until you save it as the place's name, and every log and report marks a name that started from one. BlueHeeler never looks up an address by itself: not while recording, and not when you save, share or delete anything. It shows the button only where the phone's address lookup is Google's, or where it cannot tell. A replacement for Google Play services that presents itself as Google's, such as microG, would receive the point instead of Google.</p>
+      </div>
+      <p class="note" style="max-width:760px">Links in the app, such as this policy or the Google Play page, open in your browser only when you tap them. The in-app help is built in and loads nothing from the internet.</p>
+    </section>
 
-<footer>BlueHeeler &middot; com.kosheen.antistalker</footer>
+    <section id="radio">
+      <h2>Signals BlueHeeler sends</h2>
+      <p>BlueHeeler mostly listens. It sends radio signals of its own only in these cases:</p>
+      <ul>
+        <li><strong>Pack</strong> <span class="chip opt">Optional, Pro</span> lets your own phones work together over Bluetooth, with no internet and no cloud. While it is on, each phone broadcasts a heartbeat holding a random Pack ID, its compass heading and signal calibration, its Tripwire state, and up to 16 recent sightings, each made of the last half of a device's Bluetooth address with its signal strength and age. If Use location is on, the heartbeat also carries your position, rounded to about 2 km. If you turn on trust sharing, it also shares which devices you trust or labelled. Heartbeats are signed with your Pack passphrase, so a stranger cannot inject fake ones, but they are not encrypted: anyone nearby with the right equipment can read them. Leave Pack off if you do not want this on the air.</li>
+        <li><strong>Play sound</strong>: when you tap it, BlueHeeler connects to that tracker and sends the command that makes it ring, and a stop command if you ask. It never pairs with the tracker.</li>
+        <li><strong>Read tracker details</strong> <span class="chip opt">Off unless you turn it on</span>: connects briefly to a known tracker to read its maker, model and firmware, at most once a day per device. It reads only; the tracker may log your phone's Bluetooth address.</li>
+        <li><strong>Wi-Fi scans</strong>: to see Wi-Fi devices, BlueHeeler asks Android to scan, and Android asks nearby networks to identify themselves, as it does for any Wi-Fi scan.</li>
+      </ul>
+      <p>The version on Google Play never transmits Wi-Fi frames of its own.</p>
+    </section>
+
+    <section id="third">
+      <h2>Google and other companies</h2>
+      <p>BlueHeeler shares nothing with advertising networks, analytics companies, data brokers or crash reporting services, and has none built in. The only company that receives anything because of BlueHeeler is Google, in the ways listed above: Google Play and its billing software, Android backup, the optional address lookup, and, if Google Location Accuracy is on in your phone, Android's location service. Google handles that information under the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>, and you can review and manage much of it at <a href="https://myaccount.google.com">myaccount.google.com</a>.</p>
+      <p>When you share something from BlueHeeler to another app, that app's own privacy policy applies.</p>
+    </section>
+
+    <section id="permissions" class="wide">
+      <h2>Permissions</h2>
+      <p style="max-width:760px">These are the permissions BlueHeeler holds and why. Android asks for your agreement before BlueHeeler can use most of them. You can withdraw any of them in Android's settings; the features that need them then stop.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Permission</th><th scope="col">What BlueHeeler uses it for</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Nearby devices (Bluetooth)</td><td data-label="Used for">Finding Bluetooth devices and trackers; Play sound and Read tracker details; the Pack heartbeat. Android 12 and later; BlueHeeler declares that it does not use Bluetooth scans to work out your location.</td></tr>
+            <tr><td>Nearby Wi-Fi devices and Wi-Fi state</td><td data-label="Used for">Finding Wi-Fi networks and devices, and starting Wi-Fi scans. On Android 13 and later, declared as not used for location.</td></tr>
+            <tr><td>Location (precise or approximate)</td><td data-label="Used for">Use location and Places, as described under <a href="#location">Your location</a>. On Android 8 to 11, also required by Android just to see Bluetooth devices. BlueHeeler never asks for "all the time" background location.</td></tr>
+            <tr><td>Notifications</td><td data-label="Used for">Showing alerts and the ongoing notice that protection is running</td></tr>
+            <tr><td>Foreground service, including location</td><td data-label="Used for">Keeping protection running with the screen off, and noting positions while it runs when Use location is on. On Android 10 and 11, Android also requires it for scanning while BlueHeeler is closed; that reads no position unless Use location is on.</td></tr>
+            <tr><td>Start at boot</td><td data-label="Used for">Bringing protection you had on back after your phone restarts or BlueHeeler updates. Stopping it yourself always wins.</td></tr>
+            <tr><td>Battery optimisation exemption</td><td data-label="Used for">Asking Android not to stop protection to save battery. Only if you agree.</td></tr>
+            <tr><td>Notification access <span class="chip opt">Optional</span></td><td data-label="Used for">The Security log, from the apps you tick only</td></tr>
+            <tr><td>Camera <span class="chip opt">Optional</span></td><td data-label="Used for">Scanning a QR code to join a Pack. No picture is kept.</td></tr>
+            <tr><td>Fingerprint or face</td><td data-label="Used for">Unlocking Places. Android checks it; BlueHeeler never sees your fingerprint or face.</td></tr>
+            <tr><td>Internet and network state</td><td data-label="Used for">Not used by BlueHeeler's own code. Included by Google's billing software, which uses it to reach Google Play.</td></tr>
+            <tr><td>Glyph lights</td><td data-label="Used for">On Nothing phones, flashing the rear lights for an alert</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="security">
+      <h2>How your information is protected</h2>
+      <ul>
+        <li>BlueHeeler's records sit in its private storage, which Android keeps apart from other apps and encrypts along with the rest of your phone.</li>
+        <li>Places can be locked behind your fingerprint, face or screen lock. The lock is on when you start using Places, and locks again after 10 minutes without use. Reports and logs that include places ask for it too.</li>
+        <li>Pack heartbeats are signed (HMAC-SHA-256), so a stranger cannot inject false data. They are not encrypted, as explained above.</li>
+        <li>Diagnostic copies, if you turn them on, are written where other apps with file access and a USB connection can read them. Leave them off unless you need them for a bug report.</li>
+        <li>Anyone who can unlock your phone can open BlueHeeler. If you are worried someone has access to your phone, use the Places lock and consider Turn and Burn.</li>
+      </ul>
+      <p>No security is perfect, and files you save or share are outside BlueHeeler's protection once they leave the app.</p>
+    </section>
+
+    <section id="choices">
+      <h2>Your choices and deleting data</h2>
+      <ul>
+        <li><strong>Turn features off</strong> at any time in Settings: Use location, Places, Spot devices you keep seeing, Pack, the Security log, Read tracker details, diagnostic copies and Suggest an address.</li>
+        <li><strong>Delete selectively</strong>: one place or all places, your history, or a device from any list.</li>
+        <li><strong>Choose how long</strong> history and places are kept.</li>
+        <li><strong>Turn and Burn</strong> (switched on in Settings before use) stops protection, then overwrites and deletes everything BlueHeeler holds in its storage on your phone: settings, lists, history, the Security log, places, familiar device areas, the scanning record and diagnostic copies. It does not remove files you saved to Downloads, the copy in your Google backup, your Pro purchase (Google Play restores it), or a random Pack ID that means nothing on its own. Phone storage spreads writes around to protect itself, so no app can promise every trace is physically erased.</li>
+        <li><strong>Uninstalling</strong> removes everything BlueHeeler stored on your phone, except files you saved to Downloads or shared. The Google backup copy is removed by Google in time, or straight away by you.</li>
+      </ul>
+    </section>
+
+    <section id="rights">
+      <h2>Your privacy rights</h2>
+      <p>Depending on where you live, privacy law, such as Australia's Privacy Act, the GDPR in the European Union and United Kingdom, or California's privacy laws, may give you the right to see, correct, delete or take a copy of personal information about you, and to object to how it is used.</p>
+      <p>Because BlueHeeler keeps your information on your phone, you can use those rights yourself, straight away: view everything in the app, export it with Save log or a report, and delete it as described above. We hold nothing about you from the app, so a request to us would find nothing to return. We do not sell or share personal information, and we make no automated decisions about you.</p>
+      <p>For information Google holds, such as your Play purchases, backups and address lookups, use Google's tools at <a href="https://myaccount.google.com">myaccount.google.com</a>.</p>
+      <p>If you email us, we receive your email address and whatever you write. We use it only to reply and help, and keep it only as long as that takes. If you are unhappy with how we handled your information, please tell us first; you can also complain to your local privacy regulator, which in Australia is the Office of the Australian Information Commissioner (<a href="https://www.oaic.gov.au">oaic.gov.au</a>).</p>
+    </section>
+
+    <section id="others">
+      <h2>Information about other people</h2>
+      <p>The devices BlueHeeler hears belong to the people around you. It uses their broadcast signals only to protect you, and only on your phone. If you save or share a log or report, it may contain identifiers of other people's devices, so please share it only with those who need it, such as the police, a lawyer or a support service.</p>
+    </section>
+
+    <section id="children">
+      <h2>Children</h2>
+      <p>BlueHeeler is made for adults and is not directed at children. We do not knowingly receive information from children, and the app sends us nothing from anyone.</p>
+    </section>
+
+    <section id="changes">
+      <h2>Changes to this policy</h2>
+      <p>When BlueHeeler changes how it handles information, we update this page and the date at the top no later than the new version reaching Google Play. Significant changes are also described in the app's release notes.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact us</h2>
+      <p>Blue Heeler Software<br>
+      Email: <a href="mailto:xredux@protonmail.com">xredux@protonmail.com</a></p>
+    </section>
+
+  </main>
+</div>
+
+<footer>BlueHeeler &middot; <code>com.kosheen.antistalker</code> &middot; Last updated 7 October 2026</footer>
+
 </body>
 </html>
